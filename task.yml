@@ -1,0 +1,56 @@
+events:
+  setup:
+    description: Execute setup
+    task: setup
+
+  configure:
+    description: Execute configure
+    task: configure
+
+  deploy:
+    description: Execute deploy
+    task: deploy
+
+  backup:
+    description: Execute backup
+    task: backup
+
+  restore:
+    description: Execute restore
+    task: restore
+
+tasks:
+  setup:
+    description: Execute setup chef
+    operations:
+      - chef:
+          run_list:
+            - role[{{role}}_setup]
+
+  configure:
+    description: Execute configure chef
+    operations:
+      - chef:
+          run_list:
+            - role[{{role}}_configure]
+
+  deploy:
+    description: Execute deploy chef
+    operations:
+      - chef:
+          run_list:
+            - role[{{role}}_deploy]
+
+  backup:
+    description: Execute backup chef
+    operations:
+      - chef:
+          run_list:
+            - role[{{role}}_backup]
+
+  restore:
+    description: Execute restore chef
+    operations:
+      - chef:
+          run_list:
+            - role[{{role}}_restore]
