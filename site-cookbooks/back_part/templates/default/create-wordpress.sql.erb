@@ -1,0 +1,6 @@
+CREATE DATABASE IF NOT EXISTS <%= node["wordpress"]["db"]["name"] %>;
+#GRANT ALL ON *.* TO '<%= node["wordpress"]["user"]["name"] %>'@'%';
+
+GRANT ALL ON <%= node["wordpress"]["db"]["name"] %>.* TO '<%= node["wordpress"]["user"]["name"] %>'@'<%= node["wordpress"]["db"]["host"] %>'  IDENTIFIED BY '<%= node["wordpress"]["user"]["password"] %>';
+#flush privileges;
+#delete from mysql.user where user='';

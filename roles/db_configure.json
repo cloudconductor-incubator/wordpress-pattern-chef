@@ -1,0 +1,11 @@
+{
+  "name": "db_configure",
+  "description": "Configures WordPress database",
+  "chef_type": "role",
+  "json_class":"Chef::Role",
+  "default_attributes": {
+  },
+  "run_list":[
+    "recipe[back_part::configure]"
+  ]
+}

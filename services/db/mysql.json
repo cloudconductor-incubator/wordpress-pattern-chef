@@ -1,0 +1,6 @@
+{
+  "service": {
+    "name": "mysqld",
+    "port": 3306
+  }
+}
