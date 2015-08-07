@@ -18,12 +18,8 @@ end
 
 
 # 相手のIP 取得
-require 'cloud_conductor_utils/consul'
-serverlist = CloudConductorUtils::Consul.read_servers
-serverlist.each do |ip, value|
-  if value[:roles].include?("web")
-    node.set["wordpress"]["db"]["host"] = value[:private_ip]
-  end
+node['cloudconductor']['servers'].select { |_, s| s['roles'].include?('web') }.each do |_, value|
+  node.set["wordpress"]["db"]["host"] = value[:private_ip]
 end
 
 #sqlファイル 実行

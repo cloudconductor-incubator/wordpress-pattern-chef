@@ -17,14 +17,9 @@ service "nginx" do
 end
 
 # 相手のIP 取得
-require 'cloud_conductor_utils/consul'
-serverlist = CloudConductorUtils::Consul.read_servers
-serverlist.each do |ip, value|
-  if value[:roles].include?("db")
-    node.set["wordpress"]["db"]["host"] = value[:private_ip]
-  end
+node['cloudconductor']['servers'].select { |_, s| s['roles'].include?('db') }.each do |_, value|
+  node.set["wordpress"]["db"]["host"] = value[:private_ip]
 end
-
 
 # nginxのnginx.conf
 template "#{node["nginx"]["confpath"]}/#{node["nginx"]["confname"]}" do
