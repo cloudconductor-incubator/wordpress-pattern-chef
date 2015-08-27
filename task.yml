@@ -1,3 +1,10 @@
+environments:
+  HOME: /root
+  PATH: $PATH:/opt/chefdk/embedded/bin:/opt/chef/embedded/bin:/usr/bin
+  ROLE: '{{config.role}}'
+  CONSUL_SECRET_KEY: '{{config.token}}'
+
+
 events:
   setup:
     description: Execute setup
@@ -6,6 +13,10 @@ events:
   configure:
     description: Execute configure
     task: configure
+
+  spec:
+    description: Execute spec
+    task: spec
 
   deploy:
     description: Execute deploy
@@ -33,6 +44,12 @@ tasks:
       - chef:
           run_list:
             - role[{{role}}_configure]
+
+  spec:
+    description: Execute serverspec
+    operations:
+      - execute:
+          script: python lib/event_handler.py {{role}} spec
 
   deploy:
     description: Execute deploy chef
