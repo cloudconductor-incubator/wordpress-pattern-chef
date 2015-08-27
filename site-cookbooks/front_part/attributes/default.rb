@@ -14,8 +14,8 @@ default["php-fpm"]["config"]["path"] = "/etc/php-fpm.d"
 default["php-fpm"]["config"]["name"] = "www.conf"
 default["php-fpm"]["config"]["naem"]["template"] = "www.conf.erb"
 # nginx
-default["nginx"]["source"] = "http://nginx.org/packages/centos/6/noarch/RPMS"
-default["nginx"]["package"] = "nginx-release-centos-6-0.el6.ngx.noarch.rpm"
+default["nginx"]["source"] = "http://nginx.org/packages/centos/7/noarch/RPMS"
+default["nginx"]["package"] = "nginx-release-centos-7-0.el7.ngx.noarch.rpm"
 # nginx.conf path
 default["nginx"]["conftemplate"] = "nginx.conf.erb"
 default["nginx"]["confpath"] = "/etc/nginx"
