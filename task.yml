@@ -4,6 +4,11 @@ environments:
   ROLE: '{{config.role}}'
   CONSUL_SECRET_KEY: '{{config.token}}'
 
+default:
+  timeout: 1800
+  chef:
+    attribute_keys:
+      - cloudconductor
 
 events:
   setup:
