@@ -15,7 +15,7 @@ module ConsulParameters
       JSON.parse(response, symbolize_names: true).each do |response_hash|
         parameters_json = Base64.decode64(response_hash[:Value])
         parameters = parameters.deep_merge(JSON.parse(parameters_json, symbolize_names: true))
-    end
+      end
     rescue => exception
       p exception.message
     end
@@ -31,8 +31,8 @@ module ConsulParameters
         key = response_hash[:Key]
         next if key == 'cloudconductor/servers'
         hostname = key.slice(%r{cloudconductor/servers/(?<hostname>[^/]*)}, 'hostname')
-        server_info_json = Base64.decode64(response_hash[:Value])[:cloudconductor][:servers][hostname.to_sym]
-        servers[hostname] = JSON.parse(server_info_json, symbolize_names: true)
+        server_info_json = Base64.decode64(response_hash[:Value])
+        servers[hostname] = JSON.parse(server_info_json, symbolize_names: true)[:cloudconductor][:servers][hostname.to_sym]
       end
     rescue
       servers = {}
